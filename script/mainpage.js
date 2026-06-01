@@ -8,9 +8,7 @@ const biomonitor = document.getElementById("bio")
 const daemons = document.getElementById("daemons")
 const ice = document.getElementById("ice")
 const sideText = document.getElementById("side-text")
-
 const loginPage = document.querySelector(".login-page")
-
 const userText = document.getElementById("user")
 const systemStatusText = document.getElementById("system-status")
 
@@ -23,6 +21,8 @@ sideText.textContent = `ARASAKA OS V0${year-2000}.${month}.980`;
 
 
 let username = "";
+
+let isRightShiftDown = false;
 
 
 function loadingto100(div) {
@@ -114,6 +114,28 @@ async function Startup_Sequence() {
     await otherloading(systemStatusText, "FINALIZING")
     systemStatusText.textContent = "CONNECTED"
 }
+
+
+
+window.addEventListener('keydown', (event) => {
+    if (event.code === 'ShiftRight') {
+        isRightShiftDown = true;
+    }
+    
+    const isR = event.key.toLowerCase() === 'r';
+
+    if (isRightShiftDown && isR) {
+        window.location.href = 'Startup.html';
+    }
+});
+
+window.addEventListener('keyup', (event) => {
+    if (event.code === 'ShiftRight') {
+        isRightShiftDown = false;
+    }
+});
+
+
 
 
 const usernameText = document.querySelector(".uid-input")
