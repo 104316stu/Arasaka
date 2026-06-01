@@ -118,6 +118,7 @@ async function Startup_Sequence() {
 
 const usernameText = document.querySelector(".uid-input")
 
+usernameText.focus()
 usernameText.addEventListener("keydown", (event) => {
     if (event.key === "Enter" && usernameText.value.length > 0) {
         username = usernameText.value
