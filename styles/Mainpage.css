@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
+
+
+@keyframes logoIntro {
+  0% {
+    transform: translateX(12vw) scale(2);
+  }
+  10% {
+    transform: translateX(12vw) scale(2);
+  }
+  100% {
+    transform: translateX(1.5vw) scale(0.8);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-20px);
+  }
+}
+
+body{
+    overflow: hidden;
+    background-color: #000000;
+}
+
+.grid-pattern {
+
+    background-size: 35px 35px;
+    width: 80vw;
+    height: 80vh;
+    background-color: #1a0000;
+
+
+    background-repeat: round;
+
+    border: 2px #800000 solid;
+    
+
+    background-image: 
+      linear-gradient(to right, rgba(128, 0, 0, .5) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(128, 0, 0, .5) 1px, transparent 1px);
+}
+
+.login-panel {
+    position: fixed;
+    top: 50%;
+    left: 50vw;
+    transform: translateY(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 22vw;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+    animation-delay: 1.5s;
+}
+
+.login-label {
+    font-family: 'Orbitron', sans-serif;
+    color: #e60000;
+    font-size: 0.7vw;
+    letter-spacing: 0.2em;
+    margin: 0;
+    opacity: 0;
+    animation: fadeIn 0.4s ease-out forwards;
+    animation-delay: 1.7s;
+}
+
+.uid-input {
+    background-color: #1a0000;
+    border: 1.5px solid #8b0000;
+    color: #e60000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2vw;
+    padding: 1.2vh 1vw;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    caret-color: #e60000;
+    opacity: 0;
+    animation: fadeIn 0.4s ease-out forwards;
+    animation-delay: 1.85s;
+}
+
+.uid-input::placeholder {
+    color: #e60000;
+}
+
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeIn 0.4s ease-out forwards;
+    animation-delay: 2s;
+}
+
+.slashes {
+    font-family: 'Orbitron', sans-serif;
+    color: #555;
+    font-size: 0.8vw;
+    white-space: nowrap;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background-color: #555;
+}
+
+.login-status {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65vw;
+    color: #888;
+    margin: 0;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    animation: fadeIn 0.4s ease-out forwards;
+    animation-delay: 2.15s;
+}
+
+.status-val {
+    color: #e60000;
+}
+
+.side-bar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 100vh;
+    background-color: #e60000;
+    z-index: 20;
+}
+
+.side-text {
+    position: fixed;
+    left: 40px;
+    bottom: 10px;
+    transform: rotate(-90deg);
+    transform-origin: left bottom;
+    color: #e60000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+    text-transform: uppercase;
+    z-index: 20;
+}
+
+.login-page {
+    position: absolute;
+    z-index: 10;
+    background-color: #110c0d;
+    width: 100vw;
+    height: 100vh;
+}
+
+.centered {
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.arasaka-corp {
+    position: absolute;
+    width: 35vw;
+    height: 35vh;
+    aspect-ratio: 1;
+    object-fit: contain;
+    animation: logoIntro 1.5s ease-out forwards;
+    left: 25vw;
+}
+
+
+.arasaka-corp-jp {
+    width: 15vw;
+    height: 15vh;
+    aspect-ratio: 1;
+    object-fit: contain;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.center-box {
+    position: absolute;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        position: absolute;
+    }
+
+    .logo {
+        width: 35vw;
+        height: 35vh;
+        aspect-ratio: 1;
+        object-fit: contain;
+        opacity: 25%;
+    }
+
+    .part, .small-part {
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: relative;
+        width: 18vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Orbitron', sans-serif;
+
+        .text-area {
+            width: 83%;
+            height: 75%;
+            color: #d40e0a;
+            font-size: .9vw;
+
+            span {
+                color: white;
+            }
+        }
+    }
+
+    .part {
+        background-image: url(../imgs/Part.svg);
+        aspect-ratio: 393 / 245;
+    }
+
+    .small-part {
+        background-image: url('../imgs/small-part.svg');
+        aspect-ratio: 225 / 63;
+        text-align: center;
+
+        .text-area {
+            position: absolute;
+            top: 10%;
+            font-size: 1.2vw;
+            height: 80%;
+        }
+    }
+
+    .panels-column {
+        position: absolute;
+        right: 9.8vw;
+        top: 10.5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5vh;
+    }
+}
