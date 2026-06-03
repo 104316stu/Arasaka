@@ -240,6 +240,21 @@ usernameText.addEventListener("keydown", (event) => {
 })
 
 
+async function fetchAllData() {
+    let statuses = ""
+    
+    const response = await fetch("./Data/GetData.php?all=true");
+    let jsonResponse = (await response.json())["scienceFictionInterface"];
+
+
+    for (const element of jsonResponse) {
+        statuses = statuses+element.entity+": "+element.status+`\n`
+    }
+    return statuses;
+}
+
+console.log(fetchAllData())
+
 
 
 
@@ -341,19 +356,19 @@ textarea.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault();
         const cmd = textarea.value.substring(promptStart).trim();
-        const output = runCommand(cmd);
-    
+
         if (cmd) { history.unshift(cmd); historyIndex = -1; }
-    
-        if (output === null) {
-            // command handled textarea itself (clear/cls)
-            moveCursorToEnd();
-        } else {
-            textarea.value += '\n' + (output ? output + '\n' : '') + prompt;
-            moveCursorToEnd();
-        }
-    
-        textarea.scrollTop = textarea.scrollHeight;
+
+        runCommand(cmd).then(output => {
+            if (output === null) {
+                moveCursorToEnd();
+            } else {
+                textarea.value += '\n' + (output ? output + '\n' : '') + prompt;
+                moveCursorToEnd();
+            }
+            textarea.scrollTop = textarea.scrollHeight;
+        });
+
         return;
     }
 });
@@ -378,6 +393,9 @@ function replaceInput(text) {
     moveCursorToEnd();
 }
 
+
+
+
 // --- Commands ---
 const commands = {
     help: () =>
@@ -397,15 +415,18 @@ const commands = {
 
     date: () => new Date().toString(),
 
-    status: () =>
-        'BIO-MONITOR: ONLINE\nDAEMONS: LOADED\nICE: ACTIVE\nNETWORK: ACN002077',
+    status: async () => {
+        const data = await fetchAllData();
+        return data;
+    },
+
 
     echo: (args) => args.join(' '),
 };
 
-function runCommand(raw) {
+async function runCommand(raw) {
     if (!raw) return '';
     const [cmd, ...args] = raw.trim().split(' ');
-    if (commands[cmd]) return commands[cmd](args);
+    if (commands[cmd]) return await commands[cmd](args);
     return `bash: ${cmd}: command not found`;
 }
