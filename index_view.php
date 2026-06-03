@@ -39,13 +39,13 @@ include('./Data/GetData.php')
         <div class="panels-column">
             <div class="part">
                 <div class="text-area">
-                <?= $data['scienceFictionInterface'][0]['entity'] ?>...<span class="number-load">0%</span><br>
-                    <?= $data['scienceFictionInterface'][2 - 1]['entity']?>...<span class="number-load">0%</span><br>
-                    <?= $data['scienceFictionInterface'][3 - 1]['entity']?>...<span class="number-load">0%</span><br>
-                    <?= $data['scienceFictionInterface'][4 - 1]['entity']?>...<span class="number-load">0%</span><br>
-                    <?= $data['scienceFictionInterface'][5 - 1]['entity']?> <span id="bio">OFFLINE</span><br>
-                    <?= $data['scienceFictionInterface'][6 - 1]['entity']?> <span id="daemons">OFFLINE</span><br>
-                    <?= $data['scienceFictionInterface'][7 - 1]['entity']?> <span id="ice">UNKOWN</span>
+                <?= $data[0]['entity'] ?>...<span class="number-load">0%</span><br>
+                    <?= $data[2 - 1]['entity']?>...<span class="number-load">0%</span><br>
+                    <?= $data[3 - 1]['entity']?>...<span class="number-load">0%</span><br>
+                    <?= $data[4 - 1]['entity']?>...<span class="number-load">0%</span><br>
+                    <?= $data[5 - 1]['entity']?> <span id="bio">OFFLINE</span><br>
+                    <?= $data[6 - 1]['entity']?> <span id="daemons">OFFLINE</span><br>
+                    <?= $data[7 - 1]['entity']?> <span id="ice">UNKOWN</span>
                 </div>
             </div>
 

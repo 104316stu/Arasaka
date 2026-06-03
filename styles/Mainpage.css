@@ -30,6 +30,21 @@ body{
     user-select: none;
 }
 
+
+.house {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100vh;
+    width: auto;
+    z-index: 999999;
+    opacity: 0;
+    transition: opacity 20s ease;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
 .grid-pattern {
 
     display: flex;

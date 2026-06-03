@@ -265,12 +265,11 @@ console.log(fetchAllData())
   /// terminal ////
 
 
-// --- Close button ---
 document.getElementById('close').addEventListener('click', () => {
     document.getElementById('terminal').style.display = 'none';
 });
 
-// --- Draggable window ---
+// Draggable window 
 const terminalWindow = document.getElementById('terminal');
 const titleBar = terminalWindow.querySelector('.title-bar');
 let isDragging = false, offsetX, offsetY;
@@ -290,8 +289,6 @@ document.addEventListener('mousemove', (e) => {
 
 document.addEventListener('mouseup', () => isDragging = false);
 
-
-// --- Terminal logic ---
 const textarea = document.getElementById('terminal-textarea');
 
 let history = [];
@@ -314,21 +311,20 @@ function moveCursorToEnd() {
 }
 
 function getPromptLineStart() {
-    // Find where the last prompt starts
     return textarea.value.lastIndexOf(prompt) + prompt.length;
 }
 
 textarea.addEventListener('keydown', (e) => {
     const promptStart = getPromptLineStart();
 
-    // Prevent moving cursor before the prompt
+    // prevent moving cursor before the prompt
     if ((e.key === 'ArrowLeft' || e.key === 'Backspace') &&
         textarea.selectionStart <= promptStart) {
         e.preventDefault();
         return;
     }
 
-    // Prevent selecting before prompt
+    // prevent selecting before prompt
     if (e.key === 'Home') {
         e.preventDefault();
         textarea.selectionStart = promptStart;
@@ -336,7 +332,7 @@ textarea.addEventListener('keydown', (e) => {
         return;
     }
 
-    // History up
+    // history up
     if (e.key === 'ArrowUp') {
         e.preventDefault();
         if (historyIndex < history.length - 1) historyIndex++;
@@ -344,7 +340,7 @@ textarea.addEventListener('keydown', (e) => {
         return;
     }
 
-    // History down
+    // history down
     if (e.key === 'ArrowDown') {
         e.preventDefault();
         if (historyIndex > -1) historyIndex--;
@@ -352,7 +348,7 @@ textarea.addEventListener('keydown', (e) => {
         return;
     }
 
-    // Enter — run command
+ //run command
     if (e.key === 'Enter') {
         e.preventDefault();
         const cmd = textarea.value.substring(promptStart).trim();
@@ -373,7 +369,7 @@ textarea.addEventListener('keydown', (e) => {
     }
 });
 
-// Block paste/cut before prompt
+// block paste before prompt
 textarea.addEventListener('paste', (e) => {
     if (textarea.selectionStart < getPromptLineStart()) e.preventDefault();
 });
@@ -382,7 +378,7 @@ textarea.addEventListener('cut', (e) => {
     if (textarea.selectionStart < getPromptLineStart()) e.preventDefault();
 });
 
-// Prevent click from placing cursor before prompt
+// prevent click from placing cursor before prompt
 textarea.addEventListener('click', () => {
     if (textarea.selectionStart < getPromptLineStart()) moveCursorToEnd();
 });
@@ -393,10 +389,33 @@ function replaceInput(text) {
     moveCursorToEnd();
 }
 
+function trauma() {
+    const song = new Audio('../sounds/house.mp3')
+    song.currentTime = 20
+    song.play()
+
+    const img = document.createElement('img')
+    img.src = '../imgs/house.jpeg'
+    img.classList.add("house")
+
+    document.body.appendChild(img)
+
+
+    setTimeout(() => {
+        img.style.opacity = '1'
+    }, 50)
+
+    setTimeout(() => {
+        img.style.opacity = '0'
+    }, 20000)
+
+    setTimeout(() => {
+        img.remove()
+    }, 55000)
+}
 
 
 
-// --- Commands ---
 const commands = {
     help: () =>
         'Commands: help, clear, echo [text], whoami, date, status, cls',
@@ -422,6 +441,11 @@ const commands = {
 
 
     echo: (args) => args.join(' '),
+
+    ireallywannastayatyourhouse: () => {
+        trauma()
+        return "David's dead."
+    },
 };
 
 async function runCommand(raw) {

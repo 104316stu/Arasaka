@@ -1,16 +1,45 @@
 <?php
 
-$data = "";
 $id = $_GET['id'] ?? null;
 $getAll = $_GET["all"] ?? false;
 
-
-
 if ($id) {
-    $jsdata = json_decode(file_get_contents("../movie.json"), true);
-    echo json_encode($jsdata['scienceFictionInterface'][$id - 1]);
+    $db = new SQLite3('../Data/movie.sqlite');
+    // prepared query voor injections
+    // specifiek id pakken van de database
+    $preparedQuery = $db->prepare(
+        'SELECT * FROM entities WHERE id = :id'
+    );
+
+    $preparedQuery->bindValue(
+        ':id',
+        (int)$id,
+        SQLITE3_INTEGER
+    );
+
+    $queryResult = $preparedQuery->execute();
+
+    $entityData = $queryResult->fetchArray(SQLITE3_ASSOC);
+
+    echo json_encode($entityData);
 } else if ($getAll) {
-    echo file_get_contents("../movie.json");
+    $db = new SQLite3('../Data/movie.sqlite');
+    // alles pakken sorteerd door id
+    $result = $db->query('SELECT * FROM entities ORDER BY id');
+
+    $rows = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $rows[] = $row;
+    }
+
+    echo json_encode(['scienceFictionInterface' => $rows]);
+
 } else {
-    $data = json_decode(file_get_contents("./movie.json"), true);
+    $db = new SQLite3('./Data/movie.sqlite');
+    $result = $db->query('SELECT * FROM entities ORDER BY id');
+
+    $data = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $data[] = $row;
+    }
 }
