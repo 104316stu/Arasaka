@@ -4,9 +4,10 @@ const logo = document.getElementById("logo")
 
 const divs = document.querySelectorAll('.number-load');
 
-const biomonitor = document.getElementById("bio")
-const daemons = document.getElementById("daemons")
-const ice = document.getElementById("ice")
+
+const nano = document.getElementById("bio")
+const holo = document.getElementById("daemons")
+const shield = document.getElementById("ice")
 const sideText = document.getElementById("side-text")
 const loginPage = document.querySelector(".login-page")
 const userText = document.getElementById("user")
@@ -24,6 +25,14 @@ let username = "";
 
 let isRightShiftDown = false;
 
+
+
+
+
+async function getData(id) {
+    const response = await fetch("./Data/GetData.php?id=" + id);
+    return await response.json();
+}
 
 function loadingto100(div) {
     return new Promise((resolve) => {
@@ -45,7 +54,7 @@ function loadingto100(div) {
                 logo.style.opacity = (0.35 * count) + "%"
             }
             
-
+            
             if (count >= 100) {
                 clearInterval(interval)
                 resolve()
@@ -93,26 +102,67 @@ const centerStatic = document.querySelector("#center-static")
 
 async function Startup_Sequence() {
     stopsystemStatus = false 
- 
+
+
     otherloading(systemStatusText, "CONNECTING", true)
  
     userText.textContent = username.toUpperCase()
     centerStatic.style.position = "static"
     loginPage.style.display = "none"
     loadingto100()
+    let total = 0
     for (const div of divs) {
-      await loadingto100(div)
+        total++
+      await loadingto100(div, total)
     }
- 
-    await otherloading(biomonitor, "STARTING")
-    biomonitor.textContent = "ACTIVE"
-    await otherloading(daemons, "WAKING")
-    daemons.textContent = "READY"
-    await otherloading(ice, "SENDING")
-    ice.textContent = "ENGAGED"
+    
+    await otherloading(nano, "Searching")
+    nano.textContent = (await getData(5))['status']
+    await otherloading(holo, "Loading")
+    holo.textContent = (await getData(6))['status']
+    await otherloading(shield, "Loading")
+    shield.textContent = (await getData(7))['status']
     stopsystemStatus = true
     await otherloading(systemStatusText, "FINALIZING")
     systemStatusText.textContent = "CONNECTED"
+}
+
+
+
+dragElement(document.querySelector(".title-bar"), document.getElementById("terminal"));
+
+function dragElement(elmnt, elmntToDrag) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    elmntToDrag.style.top = (elmntToDrag.offsetTop - pos2) + "px";
+    elmntToDrag.style.left = (elmntToDrag.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
 }
 
 
@@ -137,15 +187,225 @@ window.addEventListener('keyup', (event) => {
 
 
 
+document.addEventListener("mouseover", (event) => {
+    if (event.target.closest('.desktop-icon')) {
+        event.target.style.backgroundColor = "rgba(128, 128, 128, 0.3)";
+    }
+})
+
+document.addEventListener("mouseout", (event) => {
+    if (event.target.closest('.desktop-icon')) {
+        event.target.style.backgroundColor = "rgba(128, 128, 128, 0)";
+    }
+})
+
+const terminal = document.getElementById("terminal")
+let min = false
+
+document.addEventListener("click", (event) => {
+    const target = event.target
+    if (target.closest('.desktop-icon')) {
+        if (target.getAttribute("redirect")) {
+            window.location.href = new URL(target.getAttribute("redirect"), window.location.href).href
+        } else if (target.getAttribute("special") == "terminal") {
+            terminal.style.display = "block"
+            if (!min) {
+                terminalInit()
+            }
+        }
+    } else if (target.closest('.title-button')) {
+        terminal.style.display = "none"
+        if (target.closest("#close")) {
+            terminal.style.removeProperty("top")
+            terminal.style.removeProperty("left")
+            min = false
+        } else {
+            min = true
+        }
+    }
+})
+
 
 const usernameText = document.querySelector(".uid-input")
 
 usernameText.focus()
 usernameText.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" && usernameText.value.length > 0) {
+    if (event.key === "Enter" && usernameText.value.length > 0 && 
+        usernameText.value.trim().length > 0 && usernameText.value.length <= 17
+) {
         username = usernameText.value
         Startup_Sequence()
     }
 
 })
-  //Startup_Sequence()
+
+
+
+
+
+//   Startup_Sequence()
+
+
+
+  /// terminal ////
+
+
+// --- Close button ---
+document.getElementById('close').addEventListener('click', () => {
+    document.getElementById('terminal').style.display = 'none';
+});
+
+// --- Draggable window ---
+const terminalWindow = document.getElementById('terminal');
+const titleBar = terminalWindow.querySelector('.title-bar');
+let isDragging = false, offsetX, offsetY;
+
+titleBar.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - terminalWindow.getBoundingClientRect().left;
+    offsetY = e.clientY - terminalWindow.getBoundingClientRect().top;
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    terminalWindow.style.left = (e.clientX - offsetX) + 'px';
+    terminalWindow.style.top  = (e.clientY - offsetY) + 'px';
+    terminalWindow.style.position = 'absolute';
+});
+
+document.addEventListener('mouseup', () => isDragging = false);
+
+
+// --- Terminal logic ---
+const textarea = document.getElementById('terminal-textarea');
+
+let history = [];
+let historyIndex = -1;
+let inputBuffer = '';
+let prompt = 'arasaka@os:~$ ';
+
+function terminalInit() {
+    if (username) {
+        prompt = username+"@os:~$ "
+    }
+    textarea.value = 'ARASAKA OS v2077 — Type "help" for commands\n' + prompt;
+    textarea.focus();
+    moveCursorToEnd();
+}
+
+function moveCursorToEnd() {
+    textarea.selectionStart = textarea.value.length;
+    textarea.selectionEnd   = textarea.value.length;
+}
+
+function getPromptLineStart() {
+    // Find where the last prompt starts
+    return textarea.value.lastIndexOf(prompt) + prompt.length;
+}
+
+textarea.addEventListener('keydown', (e) => {
+    const promptStart = getPromptLineStart();
+
+    // Prevent moving cursor before the prompt
+    if ((e.key === 'ArrowLeft' || e.key === 'Backspace') &&
+        textarea.selectionStart <= promptStart) {
+        e.preventDefault();
+        return;
+    }
+
+    // Prevent selecting before prompt
+    if (e.key === 'Home') {
+        e.preventDefault();
+        textarea.selectionStart = promptStart;
+        textarea.selectionEnd   = promptStart;
+        return;
+    }
+
+    // History up
+    if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (historyIndex < history.length - 1) historyIndex++;
+        replaceInput(history[historyIndex] || '');
+        return;
+    }
+
+    // History down
+    if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyIndex > -1) historyIndex--;
+        replaceInput(historyIndex === -1 ? '' : history[historyIndex]);
+        return;
+    }
+
+    // Enter — run command
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        const cmd = textarea.value.substring(promptStart).trim();
+        const output = runCommand(cmd);
+    
+        if (cmd) { history.unshift(cmd); historyIndex = -1; }
+    
+        if (output === null) {
+            // command handled textarea itself (clear/cls)
+            moveCursorToEnd();
+        } else {
+            textarea.value += '\n' + (output ? output + '\n' : '') + prompt;
+            moveCursorToEnd();
+        }
+    
+        textarea.scrollTop = textarea.scrollHeight;
+        return;
+    }
+});
+
+// Block paste/cut before prompt
+textarea.addEventListener('paste', (e) => {
+    if (textarea.selectionStart < getPromptLineStart()) e.preventDefault();
+});
+
+textarea.addEventListener('cut', (e) => {
+    if (textarea.selectionStart < getPromptLineStart()) e.preventDefault();
+});
+
+// Prevent click from placing cursor before prompt
+textarea.addEventListener('click', () => {
+    if (textarea.selectionStart < getPromptLineStart()) moveCursorToEnd();
+});
+
+function replaceInput(text) {
+    const base = textarea.value.substring(0, getPromptLineStart());
+    textarea.value = base + text;
+    moveCursorToEnd();
+}
+
+// --- Commands ---
+const commands = {
+    help: () =>
+        'Commands: help, clear, echo [text], whoami, date, status, cls',
+
+    clear: () => {
+        textarea.value = 'ARASAKA OS v2077 — Type "help" for commands\n' + prompt;
+        return null;
+    },
+    
+    cls: () => {
+        textarea.value = 'ARASAKA OS v2077 — Type "help" for commands\n' + prompt;
+        return null;
+    },
+
+    whoami: () => username,
+
+    date: () => new Date().toString(),
+
+    status: () =>
+        'BIO-MONITOR: ONLINE\nDAEMONS: LOADED\nICE: ACTIVE\nNETWORK: ACN002077',
+
+    echo: (args) => args.join(' '),
+};
+
+function runCommand(raw) {
+    if (!raw) return '';
+    const [cmd, ...args] = raw.trim().split(' ');
+    if (commands[cmd]) return commands[cmd](args);
+    return `bash: ${cmd}: command not found`;
+}

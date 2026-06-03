@@ -1,28 +1,49 @@
+<?php
+include('./Data/GetData.php')
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ARASAKA OS</title>
     <link rel="stylesheet" href="./styles/Mainpage.css">
     <script src="./script/mainpage.js" defer></script>
 </head>
 <body>
     <div class="center-box" id="center-static">
         <img class="logo" id="logo" src="./imgs/ArasakaLogo.webp" alt="">
-        >
-        <div class="grid-pattern" id="grid-pattern"></div>
+        
+        <div class="grid-pattern" id="grid-pattern">
+            <div class="desktop-icon"  id="home-icon">Trash</div>
+            <div class="desktop-icon" special="terminal"  id="terminal-icon">Terminal</div>
+            <div class="desktop-icon" redirect="./Startup.html" id="restart-icon">Restart</div>
+            <div class="desktop-icon" redirect="./AboutUs.html" id="about-us-icon">About Us</div>
+            <div class="desktop-icon" redirect="./Target.html" id="target-icon">Target Page</div>
+        </div>
+
+        <div class="program" draggable="true" id="terminal" style="display: none"> 
+            <div class="title-bar">
+                <img src="../imgs/icons/Minimize.png" alt="Minimize" class="title-button static">
+                <img src="../imgs/icons/Close.svg" alt="Close" class="title-button static" id="close">
+            </div>
+            <textarea name="" id="terminal-textarea">
+                wadddup
+            </textarea>
+        </div>
         
         <div class="panels-column">
             <div class="part">
                 <div class="text-area">
-                    SYSTEM INTEGRITY...<span class="number-load">0%</span><br>
-                    DATAFORT INTEGRITY...<span class="number-load">0%</span><br>
-                    UPLINK INTEGRITY...<span class="number-load">0%</span><br>
-                    BIOLINK INTEGRITY...<span class="number-load">0%</span><br>
-                    BIOMONITOR <span id="bio">OFFLINE</span><br>
-                    DAEMONS <span id="daemons">ON STANDBY</span><br>
-                    ICE <span id="ice">INACTIVE</span>
+                <?= $data['scienceFictionInterface'][0]['entity'] ?>...<span class="number-load">0%</span><br>
+                    <?= $data['scienceFictionInterface'][2 - 1]['entity']?>...<span class="number-load">0%</span><br>
+                    <?= $data['scienceFictionInterface'][3 - 1]['entity']?>...<span class="number-load">0%</span><br>
+                    <?= $data['scienceFictionInterface'][4 - 1]['entity']?>...<span class="number-load">0%</span><br>
+                    <?= $data['scienceFictionInterface'][5 - 1]['entity']?> <span id="bio">OFFLINE</span><br>
+                    <?= $data['scienceFictionInterface'][6 - 1]['entity']?> <span id="daemons">OFFLINE</span><br>
+                    <?= $data['scienceFictionInterface'][7 - 1]['entity']?> <span id="ice">UNKOWN</span>
                 </div>
             </div>
 

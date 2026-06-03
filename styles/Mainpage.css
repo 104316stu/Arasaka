@@ -27,9 +27,14 @@
 body{
     overflow: hidden;
     background-color: #000000;
+    user-select: none;
 }
 
 .grid-pattern {
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 
     background-size: 35px 35px;
     width: 80vw;
@@ -227,10 +232,10 @@ body{
         font-family: 'Orbitron', sans-serif;
 
         .text-area {
-            width: 83%;
-            height: 75%;
+            width: 87%;
+            height: 85%;
             color: #d40e0a;
-            font-size: .9vw;
+            font-size: .87vw;
 
             span {
                 color: white;
@@ -265,4 +270,87 @@ body{
         align-items: center;
         gap: 0.5vh;
     }
+}
+
+
+#home-icon {
+    background-image: url(../imgs/icons/trash.png);
+}
+#restart-icon {
+    background-image: url(../imgs/icons/restart.png);
+}
+#about-us-icon {
+    background-image: url(../imgs/icons/Aboutus.png);
+    aspect-ratio: 1;
+}
+#terminal-icon {
+    background-image: url(../imgs/icons/Terminal.png);
+}
+#target-icon {
+    background-image: url(../imgs/icons/Target.svg);
+    
+}
+
+#terminal {
+    position: absolute;
+    width: 50%;
+    height: 70%;
+    background-color: #e60000;
+    user-drag: none;
+    -webkit-user-drag: none;
+    outline: none;
+}
+.program {
+    z-index: 12;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.title-bar {
+    width: 100%;
+    height: 6%;
+    background-color: #800000;
+    display: flex;
+    justify-content: flex-end;
+    img {
+        position: static;
+    }
+}
+
+#terminal-textarea {
+    width: 99%;
+    height: 93%;
+    resize: none;
+    user-select: all;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    color: white;
+
+}
+.title-button {
+    aspect-ratio: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.static {
+    position: static;
+}
+
+.desktop-icon {
+    width: 4%;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 70%;
+    margin: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: .8vw;
+    padding-top: 3vw;  
+    line-height: 1;
+    color: #e60000;
+    user-select: none;
+    white-space: nowrap;
 }
