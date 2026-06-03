@@ -302,6 +302,8 @@ body{
 }
 .program {
     z-index: 12;
+    border-radius: 1.5%;
+    overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -327,6 +329,7 @@ body{
     background-color: rgba(0,0,0,0);
     border: none;
     color: white;
+    outline: none;
 
 }
 .title-button {
