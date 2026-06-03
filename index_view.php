@@ -1,5 +1,5 @@
 <?php
-include('./Data/GetData.php')
+    include('./Data/GetData.php')
 ?>
 
 
@@ -31,31 +31,48 @@ include('./Data/GetData.php')
                 <img src="../imgs/icons/Minimize.png" alt="Minimize" class="title-button static">
                 <img src="../imgs/icons/Close.svg" alt="Close" class="title-button static" id="close">
             </div>
+                 <div class="trash-toolbar">
+                    <span class="trash-toolbar-path">ARASAKA-OS:///<span>TERMINAL</span></span>
+                </div>
             <textarea name="" id="terminal-textarea">
                 wadddup
             </textarea>
         </div>
 
-        <div class="program" draggable="true" id="trash" style="display: none"> 
+        <div class="program" draggable="true" id="trash" style="display: none">
             <div class="title-bar-trash">
                 <img src="../imgs/icons/Minimize.png" alt="Minimize" class="title-button static">
-                <img src="../imgs/icons/Close.svg" alt="Close" class="title-button static" id="close">
+                <img src="../imgs/icons/Close.svg" alt="Close" class="title-button static">
             </div>
-            <textarea name="" id="terminal-textarea">
-                wadddup
-            </textarea>
+            <div class="trash-body">
+                <div class="trash-toolbar">
+                    <span class="trash-toolbar-path">ARASAKA-OS:///<span>RECYCLER</span>/BIN_001</span>
+                    <span class="trash-toolbar-meta">ENCRYPTED</span>
+                </div>
+                <div class="trash-col-headers">
+                    <div class="trash-col-icon"></div>
+                    <div class="trash-col-name">Name</div>
+                    <div class="trash-col-date">Deleted</div>
+                    <div class="trash-col-type">Type</div>
+                    <div class="trash-col-size">Size</div>
+                </div>
+                <div class="trash-files" id="trashFiles"></div>
+                <div class="trash-footer">
+                    <span class="trash-footer-count"><span id="trashCount">0</span> objects in recycler</span>
+                </div>
+            </div>
         </div>
         
         <div class="panels-column">
             <div class="part">
                 <div class="text-area">
                 <?= $data[0]['entity'] ?>...<span class="number-load">0%</span><br>
-                    <?= $data[2 - 1]['entity']?>...<span class="number-load">0%</span><br>
-                    <?= $data[3 - 1]['entity']?>...<span class="number-load">0%</span><br>
-                    <?= $data[4 - 1]['entity']?>...<span class="number-load">0%</span><br>
-                    <?= $data[5 - 1]['entity']?> <span id="bio">OFFLINE</span><br>
-                    <?= $data[6 - 1]['entity']?> <span id="daemons">OFFLINE</span><br>
-                    <?= $data[7 - 1]['entity']?> <span id="ice">UNKOWN</span>
+                    <?= $data[1]['entity']?>...<span class="number-load">0%</span><br>
+                    <?= $data[2]['entity']?>...<span class="number-load">0%</span><br>
+                    <?= $data[3]['entity']?>...<span class="number-load">0%</span><br>
+                    <?= $data[4]['entity']?> <span id="bio">OFFLINE</span><br>
+                    <?= $data[5]['entity']?> <span id="daemons">OFFLINE</span><br>
+                    <?= $data[6]['entity']?> <span id="ice">UNKOWN</span>
                 </div>
             </div>
 
@@ -69,7 +86,7 @@ include('./Data/GetData.php')
             <div class="small-part">
                 <div class="text-area">
                     User<br>
-                    <span id="user">UNKNOWN</span><br>
+                    <span id="user">Faraday</span><br>
                 </div>
             </div>
         </div>

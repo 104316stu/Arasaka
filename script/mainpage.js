@@ -210,18 +210,27 @@ document.addEventListener("click", (event) => {
         if (target.getAttribute("redirect")) {
             window.location.href = new URL(target.getAttribute("redirect"), window.location.href).href
         } else if (target.getAttribute("special") == "terminal") {
-            terminal.style.display = "block"
-            if (!min) {
-                terminalInit()
+            if (terminal.style.display == "none") {
+                terminal.style.display = "block"
+                if (!min) {
+                    terminalInit()
+                }
             }
         } else if (target.getAttribute("special") == "trash") {
             trash.style.display = "block"
+            initTrash()
         }
-    } else if (target.closest('.title-button')) {
-        terminal.style.display = "none"
+            } else if (target.closest('.title-button')) {
+        const parent = target.parentElement
+        if (parent.classList.contains("trash-preview")) {
+            parent.remove()
+            return
+        }
+        const win = parent.parentElement
+        win.style.display = "none"
         if (target.closest("#close")) {
-            terminal.style.removeProperty("top")
-            terminal.style.removeProperty("left")
+            win.style.removeProperty("top")
+            win.style.removeProperty("left")
             min = false
         } else {
             min = true
@@ -297,11 +306,11 @@ const textarea = document.getElementById('terminal-textarea');
 let history = [];
 let historyIndex = -1;
 let inputBuffer = '';
-let prompt = 'arasaka@os:~$';
+let prompt = 'Faraday@arasakaos:~$';
 
 function terminalInit() {
     if (username) {
-        prompt = username+"@os:~$ "
+        prompt = username+"@arasakaos:~$ "
     }
     textarea.value = 'ARASAKA OS v2077 — Type "help" for commands\n' + prompt;
     textarea.focus();
@@ -465,7 +474,7 @@ const commands = {
         return null;
     },
 
-    whoami: () => username,
+    whoami: () => "Arasaka\\" + username,
 
     date: () => new Date().toString(),
 
@@ -510,3 +519,62 @@ async function runCommand(raw) {
     if (commands[cmd]) return await commands[cmd](args);
     return `bash: ${cmd}: command not found`;
 }
+terminalInit()
+// trashhhh
+
+
+const trashFileData = [
+    { name: "adam_smasher_image", ext: ".jpg", date: "2077.01.31", type: "IMAGE", size: "18 KB", img: "../imgs/trash/adam.webp" },
+
+    { name: "soulkiller_demo", ext: ".vid", date: "2077.02.14", type: "VIDEO", size: "2.1 GB", video: "../imgs/trash/Johhny.mp4" },
+
+]
+
+function initTrash() {
+    const container = document.getElementById("trashFiles")
+    if (container.children.length > 0) return
+
+    document.getElementById("trashCount").textContent = trashFileData.length
+
+    trashFileData.forEach(f => {
+        const row = document.createElement("div")
+        row.className = "trash-item"
+        row.innerHTML = `
+            <div class="trash-col-icon">▣</div>
+            <div class="trash-col-name trash-item-name">${f.name}<span class="trash-item-ext">${f.ext}</span></div>
+            <div class="trash-col-date trash-item-date">${f.date}</div>
+            <div class="trash-col-type trash-item-type">${f.type}</div>
+            <div class="trash-col-size trash-item-size">${f.size}</div>
+        `
+        row.addEventListener("click", () => {
+            if (f.img || f.video || f.text) {
+                const wrapper = document.createElement("div")
+                wrapper.className = "trash-preview"
+
+                const closeButton = document.createElement("img")
+                closeButton.src = "../imgs/icons/Close.svg"
+                closeButton.alt = "Close"
+                closeButton.className = "title-button static"
+                wrapper.appendChild(closeButton)
+
+                if (f.img) {
+                    const img = document.createElement("img")
+                    img.src = f.img
+                    wrapper.appendChild(img)
+                } else if (f.video) {
+                    const video = document.createElement("video")
+                    video.src = f.video
+                    video.controls = true
+                    video.autoplay = true
+                    video.loop = true
+                    wrapper.appendChild(video)
+                }
+
+                document.body.appendChild(wrapper)
+                dragElement(wrapper, wrapper)
+            }
+        }
+    )
+    container.appendChild(row)
+})}
+
