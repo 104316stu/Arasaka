@@ -129,7 +129,8 @@ async function Startup_Sequence() {
 
 
 
-dragElement(document.querySelector(".title-bar"), document.getElementById("terminal"));
+dragElement(document.querySelector(".title-bar-terminal"), document.getElementById("terminal"))
+dragElement(document.querySelector(".title-bar-trash"), document.getElementById("trash"))
 
 function dragElement(elmnt, elmntToDrag) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -200,6 +201,7 @@ document.addEventListener("mouseout", (event) => {
 })
 
 const terminal = document.getElementById("terminal")
+const trash = document.getElementById("trash")
 let min = false
 
 document.addEventListener("click", (event) => {
@@ -212,6 +214,8 @@ document.addEventListener("click", (event) => {
             if (!min) {
                 terminalInit()
             }
+        } else if (target.getAttribute("special") == "trash") {
+            trash.style.display = "block"
         }
     } else if (target.closest('.title-button')) {
         terminal.style.display = "none"
@@ -241,19 +245,18 @@ usernameText.addEventListener("keydown", (event) => {
 
 
 async function fetchAllData() {
-    let statuses = ""
-    
     const response = await fetch("./Data/GetData.php?all=true");
-    let jsonResponse = (await response.json())["scienceFictionInterface"];
+    const jsonResponse = (await response.json()).scienceFictionInterface;
 
+    let statuses = "";
 
     for (const element of jsonResponse) {
-        statuses = statuses+element.entity+": "+element.status+`\n`
+        statuses += `${element.entity}: ${element.status}\n`;
     }
-    return statuses;
+
+    return statuses.trimEnd();
 }
 
-console.log(fetchAllData())
 
 
 
@@ -271,7 +274,7 @@ document.getElementById('close').addEventListener('click', () => {
 
 // Draggable window 
 const terminalWindow = document.getElementById('terminal');
-const titleBar = terminalWindow.querySelector('.title-bar');
+const titleBar = terminalWindow.querySelector('.title-bar-terminal');
 let isDragging = false, offsetX, offsetY;
 
 titleBar.addEventListener('mousedown', (e) => {
@@ -294,7 +297,7 @@ const textarea = document.getElementById('terminal-textarea');
 let history = [];
 let historyIndex = -1;
 let inputBuffer = '';
-let prompt = 'arasaka@os:~$ ';
+let prompt = 'arasaka@os:~$';
 
 function terminalInit() {
     if (username) {
@@ -318,8 +321,15 @@ textarea.addEventListener('keydown', (e) => {
     const promptStart = getPromptLineStart();
 
     // prevent moving cursor before the prompt
-    if ((e.key === 'ArrowLeft' || e.key === 'Backspace') &&
-        textarea.selectionStart <= promptStart) {
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+        if (textarea.selectionStart <= promptStart || 
+            textarea.selectionEnd < promptStart) {
+            e.preventDefault();
+            return;
+        }
+    }
+    
+    if (e.key === 'ArrowLeft' && textarea.selectionStart <= promptStart) {
         e.preventDefault();
         return;
     }
@@ -382,6 +392,8 @@ textarea.addEventListener('cut', (e) => {
 textarea.addEventListener('click', () => {
     if (textarea.selectionStart < getPromptLineStart()) moveCursorToEnd();
 });
+textarea.addEventListener('keyup', () => enforcePromptBoundary());
+textarea.addEventListener('mouseup', () => enforcePromptBoundary());
 
 function replaceInput(text) {
     const base = textarea.value.substring(0, getPromptLineStart());
@@ -389,8 +401,19 @@ function replaceInput(text) {
     moveCursorToEnd();
 }
 
+function enforcePromptBoundary() {
+    const promptStart = getPromptLineStart();
+    if (textarea.selectionStart < promptStart) {
+        textarea.selectionStart = promptStart;
+    }
+    if (textarea.selectionEnd < promptStart) {
+        textarea.selectionEnd = promptStart;
+    }
+}
+
+const song = new Audio('../sounds/house.mp3')
 function trauma() {
-    const song = new Audio('../sounds/house.mp3')
+    
     song.currentTime = 20
     song.play()
 
@@ -411,7 +434,19 @@ function trauma() {
 
     setTimeout(() => {
         img.remove()
-    }, 55000)
+    }, 35000)
+}
+
+async function showEntity(id) {
+    const data = await getData(id);
+
+    let output = "";
+
+    for (const [key, value] of Object.entries(data)) {
+        output += `${key}: ${value}\n`;
+    }
+
+    return output;
 }
 
 
@@ -434,9 +469,30 @@ const commands = {
 
     date: () => new Date().toString(),
 
-    status: async () => {
-        const data = await fetchAllData();
-        return data;
+    status: async (args) => {
+        if (args.length === 0) {
+            return await fetchAllData();
+        }
+    
+        const search = args.join(" ").toLowerCase();
+    
+        const response = await fetch("./Data/GetData.php?all=true");
+        const allData = (await response.json()).scienceFictionInterface;
+    
+        const entity = allData.find(
+            item => item.entity.toLowerCase() === search
+        );
+    
+        if (!entity) {
+            return `Entity "${search}" not found`;
+        }
+    
+        const fullData = await getData(entity.id);
+    
+        return Object.entries(fullData)
+        .filter(([key, value]) => value !== null && key !== 'id')
+            .map(([key, value]) => `${key}: ${value}`)
+            .join('\n');
     },
 
 

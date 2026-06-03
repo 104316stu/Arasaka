@@ -19,7 +19,7 @@ include('./Data/GetData.php')
         <img class="logo" id="logo" src="./imgs/ArasakaLogo.webp" alt="">
         
         <div class="grid-pattern" id="grid-pattern">
-            <div class="desktop-icon"  id="home-icon">Trash</div>
+            <div class="desktop-icon" special="trash" id="trash-icon">Trash</div>
             <div class="desktop-icon" special="terminal"  id="terminal-icon">Terminal</div>
             <div class="desktop-icon" redirect="./Startup.html" id="restart-icon">Restart</div>
             <div class="desktop-icon" redirect="./AboutUs.html" id="about-us-icon">About Us</div>
@@ -27,7 +27,17 @@ include('./Data/GetData.php')
         </div>
 
         <div class="program" draggable="true" id="terminal" style="display: none"> 
-            <div class="title-bar">
+            <div class="title-bar-terminal">
+                <img src="../imgs/icons/Minimize.png" alt="Minimize" class="title-button static">
+                <img src="../imgs/icons/Close.svg" alt="Close" class="title-button static" id="close">
+            </div>
+            <textarea name="" id="terminal-textarea">
+                wadddup
+            </textarea>
+        </div>
+
+        <div class="program" draggable="true" id="trash" style="display: none"> 
+            <div class="title-bar-trash">
                 <img src="../imgs/icons/Minimize.png" alt="Minimize" class="title-button static">
                 <img src="../imgs/icons/Close.svg" alt="Close" class="title-button static" id="close">
             </div>
