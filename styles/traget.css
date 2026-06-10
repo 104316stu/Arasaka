@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+/* 
+.jetbrains-mono-<uniquifier> {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+} */
 
 *{
     margin: 0;
@@ -20,7 +28,35 @@ body{
     position: relative;
 }
 
+/* ====================================== */
 
+/* Header */
+.header{
+    display: flex;
+    position: absolute;
+    z-index: 99;
+    width: 75%;
+    justify-self: center;
+    margin-top: 3em;
+    margin-right: 1.5em;
+}
+
+/* Header logo */
+.img_logo{height: 3em;}
+
+
+.h-txt{
+    color: #e60000;
+    font-size: 14px;
+    letter-spacing: 0.13em;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    padding-top: 1em;
+    padding-left: 1em;
+}
+/* ====================================== */
 /* Logoo */
 .logo{
     position: absolute;
@@ -31,6 +67,8 @@ body{
     object-fit: contain;
     opacity: 30%;
 }
+
+/* ====================================== */
 /*  Grid pattern  */
 .grid-pattern {
 
@@ -64,7 +102,8 @@ body{
     z-index: 1;
 }
 
-/*  */
+/* ====================================== */
+/* Too much grid bullshit broo */
 .secs1 {
     grid-column: span 3 / span 3;
     grid-row: span 3 / span 3;
@@ -114,111 +153,37 @@ body{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* .main_content{
+/* Designs */
+.coner_ui_top{
+    justify-self: center;
+    width: 80%;
+    height: 80dvh;
+    position: absolute;
     display: flex;
-    width: 100%;
-    height: 98dvh;
-}
-
-.parent {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    gap: 8px;
-    width: 100%;
-    height: auto;
-    background-color: lavenderblush;
-}
+    z-index: 100;
+    margin-top: 6.5em;
     
-.secs1 {
-    grid-column: span 2 / span 2;
-    grid-row: span 2 / span 2;
-    grid-column-start: 2;
-    grid-row-start: 2;
-    background-color: coral;
+    img{
+        width: 6em;
+        height: 8em;
+    }
 }
 
-.secs2 {
-    grid-column: span 2 / span 2;
-    grid-row: span 6 / span 6;
-    grid-column-start: 2;
-    grid-row-start: 4;
-    background-color: yellow;
-}
-
-.secs3 {
-    grid-column: span 2 / span 2;
-    grid-row: span 8 / span 8;
-    grid-column-start: 4;
-    grid-row-start: 2;
-    background-color: green;
-}
-
-.secs4 {
-    grid-column: span 3 / span 3;
-    grid-row: span 3 / span 3;
-    grid-column-start: 6;
-    grid-row-start: 2;
-    background-color: blueviolet;
-}
-
-.secs5 {
-    grid-column: span 3 / span 3;
-    grid-row: span 2 / span 2;
-    grid-column-start: 6;
-    grid-row-start: 5;
-    background-color: cornflowerblue;
-}
-
-.secs6 {
-    grid-column: span 3 / span 3;
-    grid-row: span 3 / span 3;
-    grid-column-start: 6;
-    grid-row-start: 7;
-    background-color: crimson;
-}
-         */
+ .coner_ui_bottom{
+    justify-self: center;
+    width: 80%;
+    height: 80dvh;
+    position: absolute;
+    display: flex;
+    z-index: 101;
+    margin-top: 6.5em;
+    align-items: flex-end;
+    flex-direction: row-reverse;
+    
+ 
+    
+    img{
+        width: 6em;
+        height: 8em;
+    }
+} 
