@@ -109,7 +109,9 @@ body{
     grid-row: span 3 / span 3;
     grid-column-start: 1;
     grid-row-start: 1;
-    background-color: coral;
+    display: flex;
+    /* background-color: coral; */
+    justify-content: center;
 }
 
 .secs2 {
@@ -117,7 +119,7 @@ body{
     grid-row: span 7/ span 7;
     grid-column-start: 1;
     grid-row-start: 4;
-    /* background-color: yellow; */
+    background-color: yellow;
 }
 
 .secs3 {
@@ -157,11 +159,16 @@ body{
 /* Sec1 */
 .sec1-main{
     display: flex;
-    width: 100%;
+    width: 90%;
+    /* margin-top: 0.5em; */
     height: 100%;
     border: solid #a00a0a;
     justify-content: center;
     overflow: hidden;
+}
+.target{
+    height: 27em;
+    /* border: solid yellow; */
 }
 
 
@@ -201,3 +208,5 @@ body{
         height: 8em;
     }
 } 
+
+
