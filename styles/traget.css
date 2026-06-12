@@ -71,18 +71,17 @@ body{
 /* ====================================== */
 /*  Grid pattern  */
 .grid-pattern {
-
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
     background-size: 35px 35px;
     width: 80vw;
     height: 80vh;
     background-color: #1a0000;
-
-
     background-repeat: round;
-
     border: 2px #800000 solid;
-    
-
     background-image: 
       linear-gradient(to right, rgba(128, 0, 0, .5) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(128, 0, 0, .5) 1px, transparent 1px);
@@ -92,12 +91,15 @@ body{
 /* Grid stuff */
 .main_parent{
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
     gap: 8px;
-    width: 80%;
-    height: 80%;
+    width: 80vw;
+    height: 80vh;
     /* background-color: lavenderblush; */
     z-index: 1;
 }
@@ -176,37 +178,36 @@ body{
 /* ====================================== */
 /* Designs */
 .coner_ui_top{
-    justify-self: center;
-    width: 80%;
-    height: 80dvh;
     position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 101;
     display: flex;
-    z-index: 100;
-    margin-top: 6.5em;
-    
-    img{
-        width: 6em;
-        height: 8em;
-    }
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0;
+    margin: 0;
+}
+
+.coner_ui_top img{
+    width: 6em;
+    height: 8em;
+    display: block;
 }
 
 .coner_ui_bottom{
-    justify-self: center;
-    width: 80%;
-    height: 80dvh;
     position: absolute;
-    display: flex;
+    bottom: 0;
+    right: 0;
     z-index: 101;
-    margin-top: 6.5em;
+    display: flex;
+    justify-content: flex-end;
     align-items: flex-end;
-    flex-direction: row-reverse;
-    
- 
-    
-    img{
-        width: 6em;
-        height: 8em;
-    }
-} 
+    padding: 0;
+    margin: 0;
+}
 
-
+.coner_ui_bottom img{
+    width: 6em;
+    height: 8em;
+}
