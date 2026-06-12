@@ -32,17 +32,20 @@ body{
 
 /* Header */
 .header{
-    display: flex;
-    position: absolute;
-    z-index: 99;
-    width: 75%;
-    justify-self: center;
-    margin-top: 3em;
-    margin-right: 1.5em;
+width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 200;
+  gap: 0.75rem;
+  position: absolute;
+  margin-top: 2em;
+  padding-left: 12rem;
 }
 
+
 /* Header logo */
-.img_logo{height: 3em;}
+.img_logo{height: 3em; display:block;}
 
 
 .h-txt{
@@ -50,11 +53,8 @@ body{
     font-size: 14px;
     letter-spacing: 0.13em;
     font-family: "JetBrains Mono", monospace;
-    font-optical-sizing: auto;
     font-weight: 500;
-    font-style: normal;
-    padding-top: 1em;
-    padding-left: 1em;
+    line-height: 1;
 }
 /* ====================================== */
 /* Logoo */
