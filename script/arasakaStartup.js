@@ -209,7 +209,7 @@ function animate() {
         setTimeout(animate, delay)
     } else {
         setTimeout(() => {
-            window.location.href = 'test.html'
+            window.location.href = './index.php'
         }, 1500)
     }
 }

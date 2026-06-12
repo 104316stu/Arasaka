@@ -27,9 +27,29 @@
 body{
     overflow: hidden;
     background-color: #000000;
+    user-select: none;
+}
+
+
+.house {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100vh;
+    width: auto;
+    z-index: 999999;
+    opacity: 0;
+    transition: opacity 20s ease;
+    -webkit-user-drag: none;
+    pointer-events: none;
 }
 
 .grid-pattern {
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 
     background-size: 35px 35px;
     width: 80vw;
@@ -227,10 +247,10 @@ body{
         font-family: 'Orbitron', sans-serif;
 
         .text-area {
-            width: 83%;
-            height: 75%;
+            width: 87%;
+            height: 85%;
             color: #d40e0a;
-            font-size: .9vw;
+            font-size: .87vw;
 
             span {
                 color: white;
@@ -265,4 +285,254 @@ body{
         align-items: center;
         gap: 0.5vh;
     }
+}
+
+
+#trash-icon {
+    background-image: url(../imgs/icons/trash.png);
+}
+#restart-icon {
+    background-image: url(../imgs/icons/restart.png);
+}
+#about-us-icon {
+    background-image: url(../imgs/icons/Aboutus.png);
+    aspect-ratio: 1;
+}
+#terminal-icon {
+    background-image: url(../imgs/icons/Terminal.png);
+}
+#target-icon {
+    background-image: url(../imgs/icons/Target.svg);
+    
+}
+
+#terminal {
+    width: 50%;
+    height: 70%;
+
+}
+
+#trash {
+
+    width: 50%;
+    height: 70%;
+
+
+}
+
+.program {
+    background-color: #110c0d;
+    z-index: 12;
+    border-radius: 1.5%;
+    overflow: hidden;
+    user-drag: none;
+    -webkit-user-drag: none;
+    outline: none;
+    position: absolute;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.title-bar-terminal, .title-bar-trash {
+    width: 100%;
+    height: 6%;
+    background-color: #800000;
+    display: flex;
+    justify-content: flex-end;
+    img {
+        position: static;
+    }
+}
+
+#terminal-textarea {
+    width: 99%;
+    height: 93%;
+    resize: none;
+    user-select: all;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    color: white;
+    outline: none;
+    position: absolute;
+    left: 1vw;
+}
+.title-button {
+    aspect-ratio: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.static {
+    position: static;
+}
+
+.desktop-icon {
+    width: 4%;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 70%;
+    margin: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: .8vw;
+    padding-top: 3vw;  
+    line-height: 1;
+    color: #e60000;
+    user-select: none;
+    white-space: nowrap;
+}
+
+
+.trash-body {
+    width: 100%;
+    height: 94%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Orbitron', sans-serif;
+    background-color: rgba(0,0,0,0);
+}
+
+.trash-toolbar {
+    height: 5%;
+    background-color: #1a0000;
+    border-bottom: 1px solid #5a0000;
+    padding: 0 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.trash-toolbar-path {
+    color: #800000;
+    font-size: 0.6vw;
+}
+
+.trash-toolbar-path span {
+    color: #e60000;
+}
+
+.trash-toolbar-meta {
+    color: #555555;
+    font-size: 0.55vw;
+}
+
+.trash-col-headers {
+    height: 5%;
+    background-color: #0e0000;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    color: #555555;
+    font-size: 0.5vw;
+    text-transform: uppercase;
+}
+
+.trash-files {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.trash-item {
+    padding: 0 14px;
+    height: 9%;
+    display: flex;
+    align-items: center;
+}
+
+.trash-item:hover {
+    background-color: rgba(230, 0, 0, 0.07);
+}
+
+.trash-item:hover .trash-item-name {
+    color: #e60000;
+}
+
+.trash-footer {
+    height: 5%;
+    background-color: #0e0000;
+    padding: 0 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #555555;
+    font-size: 0.5vw;
+}
+
+.trash-footer-count span {
+    color: #800000;
+}
+
+.trash-col-icon {
+    width: 1.2vw;
+    color: #600000;
+    font-size: 0.6vw;
+}
+
+.trash-col-name {
+    flex: 3;
+}
+
+.trash-col-date {
+    flex: 2;
+}
+
+.trash-col-type {
+    flex: 1.5;
+}
+
+.trash-col-size {
+    flex: 1;
+    text-align: right;
+}
+
+.trash-item-name {
+    color: #c00000;
+    font-size: 0.6vw;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.trash-item-ext {
+    color: #800000;
+}
+
+.trash-item-date,
+.trash-item-type,
+.trash-item-size {
+    color: #4a0000;
+    font-size: 0.55vw;
+    letter-spacing: 0.05em;
+}
+
+.trash-item-type {
+    text-transform: uppercase;
+    font-size: 0.5vw;
+}
+
+.trash-item-size {
+    text-align: right;
+}
+
+.trash-preview {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80vw;
+    max-height: 80vh;
+    border: 2px solid #e60000;
+    z-index: 15;
+}
+
+.trash-preview .title-button {
+    position: absolute;
+    right: 0;
+    width: 6vh;
 }
