@@ -1,4 +1,4 @@
-// Not my CODE (unfortunatly, Holy Ai) I do understand what it does though.
+// Not my CODE (unfortunatly, Holy Ai and youtube vidoes) I do understand what it does though.
 const popupButton = document.getElementById('popupButton');
 const modalBackdrop = document.getElementById('modalBackdrop');
 const modalClose = document.getElementById('modalClose');
