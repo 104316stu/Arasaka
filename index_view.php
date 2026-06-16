@@ -1,8 +1,3 @@
-<?php
-    include('./Data/GetData.php')
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +17,7 @@
             <div class="desktop-icon" special="trash" id="trash-icon">Trash</div>
             <div class="desktop-icon" special="terminal"  id="terminal-icon">Terminal</div>
             <div class="desktop-icon" redirect="./Startup.html" id="restart-icon">Restart</div>
+            <div class="desktop-icon" redirect="./index.php" id="logout-icon">Logout</div>
             <div class="desktop-icon" redirect="./AboutUs.html" id="about-us-icon">About Us</div>
             <div class="desktop-icon" redirect="./Target.html" id="target-icon">Target Page</div>
         </div>
