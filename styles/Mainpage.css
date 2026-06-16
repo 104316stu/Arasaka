@@ -305,6 +305,9 @@ body{
     background-image: url(../imgs/icons/Target.svg);
     
 }
+#logout-icon {
+    background-image: url(../imgs/icons/Logout.svg);
+}
 
 #terminal {
     width: 50%;

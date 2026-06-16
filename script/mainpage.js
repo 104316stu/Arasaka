@@ -176,7 +176,7 @@ window.addEventListener('keydown', (event) => {
     const isR = event.key.toLowerCase() === 'r';
 
     if (isRightShiftDown && isR) {
-        window.location.href = 'Startup.html';
+        resetUsername(() => window.location.href = 'Startup.html')
     }
 });
 
@@ -208,7 +208,11 @@ document.addEventListener("click", (event) => {
     const target = event.target
     if (target.closest('.desktop-icon')) {
         if (target.getAttribute("redirect")) {
-            window.location.href = new URL(target.getAttribute("redirect"), window.location.href).href
+            if (target.getAttribute("redirect") == './Startup.html' || target.getAttribute("redirect") == './index.php') {
+                resetUsername(() => window.location.href = target.getAttribute("redirect"))
+            } else {
+                window.location.href = new URL(target.getAttribute("redirect"), window.location.href).href
+            }
         } else if (target.getAttribute("special") == "terminal") {
             if (terminal.style.display == "none") {
                 terminal.style.display = "block"
@@ -241,6 +245,24 @@ document.addEventListener("click", (event) => {
 
 const usernameText = document.querySelector(".uid-input")
 
+function passVal(){
+    var xhr = new XMLHttpRequest()
+    xhr.open("POST", "index.php", true)
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    xhr.send("username=" + encodeURIComponent(username))
+}
+
+function resetUsername(callback) {
+    username = ""
+    var xhr = new XMLHttpRequest()
+    xhr.open("POST", "index.php", true)
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    xhr.onload = function() {
+        if (callback) callback()
+    }
+    xhr.send("username=")
+}
+
 usernameText.focus()
 usernameText.addEventListener("keydown", (event) => {
     if (event.key === "Enter" && usernameText.value.length > 0 && 
@@ -248,6 +270,7 @@ usernameText.addEventListener("keydown", (event) => {
 ) {
         username = usernameText.value
         Startup_Sequence()
+        passVal()
     }
 
 })
