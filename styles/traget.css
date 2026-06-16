@@ -87,15 +87,49 @@ width: 80%;
       linear-gradient(to bottom, rgba(128, 0, 0, .5) 1px, transparent 1px);
 }
 
+/* =====================* Panel *==================== */
+.panel {
+    padding: 0.9em;
+    border-radius: 8px;
+    background: rgba(30, 0, 0, 0.85);
+    border: 1px solid #ff000059;
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+    color: white;
+  }
+  
+  
+  .panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, #ff000008, transparent 52%);
+  }
+  
+  .panel h2 {
+    margin: 0 0 16px;
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fcfcfd;
+  }
+  
+  .pulse-card {
+    animation: cardPulse 8s ease-in-out infinite;
+  }
 
+/* ------------------------------------ */
+/* Too much grid bullshit broo */
 /* Grid stuff */
-.main_parent{
+.main_grid{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(10, 1fr);
     gap: 8px;
     width: 80vw;
@@ -103,76 +137,370 @@ width: 80%;
     /* background-color: lavenderblush; */
     z-index: 1;
 }
-
-/* ====================================== */
-/* Too much grid bullshit broo */
+/* ============================ * Section 1 * ========================== */
 .secs1 {
-    grid-column: span 3 / span 3;
+    grid-column: span 5 / span 5;
     grid-row: span 3 / span 3;
     grid-column-start: 1;
     grid-row-start: 1;
-    display: flex;
     /* background-color: coral; */
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
+.target-image{
+  display: flex;
+  width: 90%;
+  justify-content: center;
+}
+.profile{
+  padding-top: 16em;
+  width: 22em;
+}
+  .image-frame {
+    position: relative;
+    height: 12em;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #3c0000cc, #000000cc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .target-image::after {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border-radius: 14px;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.18), transparent 55%);
+  }
+  
+  .scan-reticle {
+    position: absolute;
+    inset: 47px;
+    border: 1px solid #ff000059;
+    border-radius: 35px;
+    box-shadow: 0 0 30px #ff000033;
+    animation: 10000ms linear 0ms infinite normal none running reticleSpin;
+  }
+
+/* End section 1 */
+/* ========================= * Section 2 * ============================== */
 .secs2 {
-    grid-column: span 3 / span 3;
-    grid-row: span 7/ span 7;
+    grid-column: span 5 / span 5;
+    grid-row: span 4/ span 2;
     grid-column-start: 1;
     grid-row-start: 4;
-    background-color: yellow;
+    display: flex;
+    flex-direction: column;
 }
 
+.fingerprint-panel{
+  height: 100%;
+}
+
+  .fingerprint-shell {
+    height: 7em;
+    border-radius: 20px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 0, 0, 0.08), transparent 24%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.03), transparent 48%);
+    display: flex;
+    place-items: center;
+    position: relative;
+    justify-content: center;
+  }
+  
+  .fingerprint-ring {
+    width: 200px;
+    height: 211px;
+    border-radius: 999px;
+    border: 2px dashed rgba(255, 0, 0, 0.45);
+    animation: ringPulse 2.5s infinite ease-in-out;
+    position: relative;
+  }
+  
+  /* Before and after are lifesavers, man */
+  .fingerprint-ring::before,
+  .fingerprint-ring::after {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border-radius: 999px;
+    border: 1px dashed rgba(255, 0, 0, 0.25);
+  }
+  
+  .fingerprint-code {
+    position: absolute;
+    color: #ff8d8d;
+    font-size: 0.95rem;
+    letter-spacing: 0.16em;
+  }
+/* End section 2 */
+
+/* ========================= * Section 3 * ============================== */
 .secs3 {
-    grid-column: span 2 / span 2;
-    grid-row: span 1 / span 10;
-    grid-column-start: 4;
-    grid-row-start: 1;
+    grid-column: span 5 / span 5;
+    grid-row: span 4 / span 5;
+    grid-column-start: 1;
+    grid-row-start: 6;
     /* background-color: green; */
 }
-
-.secs4 {
-    grid-column: span 4 / span 5;
-    grid-row: span 4 / span 4;
-    grid-column-start: 6;
-    grid-row-start: 1;
-    /* background-color: blueviolet; */
+.crimes-panel{
+  height: 100%;
+}
+.crimes-panel ul {
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  gap: 0.8em;
+  flex-direction: column;
+  color: #edf4f4;
 }
 
-.secs5 {
+.crimes-panel li {
+  padding: 16px 14px;
+  border: 1px solid #ff00002e;
+  border-radius: 16px;
+  background: #ff000008;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.crimes-panel li:hover {
+  transform: translateX(6px);
+  background: #ff00001f;
+}
+/* End section 3 */
+/* ========================= * Section 4 * ============================== */
+
+.secs4 {
     grid-column: span 4 / span 4;
-    grid-row: span 2 / span 2;
+    grid-row: span 10 / span 10;
     grid-column-start: 6;
-    grid-row-start: 5;
+    grid-row-start: 1;
+}
+
+.body-view-panel{height: 100%;}
+
+.body-scan {
+  position: relative;
+  min-height: 50em;
+  border-radius: 20px;
+  background: radial-gradient(circle at center, #ff000024, transparent 48%);
+  overflow: hidden;
+}
+
+.body-silhouette {
+  position: absolute;
+  inset: 32px;
+  background: linear-gradient(180deg, rgba(255, 0, 0, 0.24), rgba(180, 0, 0, 0.1));
+  border-radius: 18px;
+  box-shadow: inset 0 0 30px #ff00002e;
+}
+
+.scan-lines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(#ff000014 1px, transparent 1px);
+  background-size: 100% 24px;
+  opacity: 0.7;
+  animation: scanMove 3s linear infinite;
+}
+
+
+/* End section 4 */
+
+/* ========================= * Section 5 * ============================== */
+.secs5 {
+    grid-column: span 3 / span 3;
+    grid-row: span 3 / span 4;
+    grid-column-start: 10;
+    grid-row-start: 1;
     /* background-color: cornflowerblue; */
 }
 
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  color: #f1f1f1;
+}
+
+.info-list div {
+  padding: 13px 15px;
+  background: rgba(255, 0, 0, 0.05);
+  border: 1px solid rgba(255, 0, 0, 0.12);
+  border-radius: 14px;
+}
+/* End section 5 */
+
+/* ========================= * Section 6 * ============================== */
 .secs6 {
-    grid-column: span 4 / span 4;
-    grid-row: span 4 / span 4;
-    grid-column-start: 6;
-    grid-row-start: 7;
+    grid-column: span 3/ span 3;
+    grid-row: span 2 / span 2;
+    grid-column-start: 10;
+    grid-row-start: 5;
     /* background-color: crimson; */
 }
 
-/* ====================================== */
-/* Sections */
-/* Sec1 */
-.sec1-main{
-    display: flex;
-    width: 90%;
-    /* margin-top: 0.5em; */
-    height: 100%;
-    border: solid #a00a0a;
-    justify-content: center;
-    overflow: hidden;
-}
-.target{
-    height: 27em;
-    /* border: solid yellow; */
+.operative-card {
+  padding: 1.2em;
+  background: rgba(255, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
 }
 
+.operative-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.operative-rank {
+  color: #ffb3b3;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+/* End section 6 */
+
+/* ========================= * Section 7 * ============================== */
+ .secs7 {
+    grid-column: span 3 / span 3;
+    grid-row: span 6/ span 5;
+    grid-column-start: 10;
+    grid-row-start: 7;
+    /* background-color: pink; */
+}
+
+
+#infoPanel {
+  grid-column: span 6;
+}
+.action-panel {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+}
+
+.tech-button {
+  padding: 16px 14px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff0b0b, #8f0000);
+  color: #fff;
+  font-size: 0.8em;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  box-shadow: 0 0 24px rgba(255, 0, 0, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 35%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tech-button:hover {
+  transform: translateY(-2px);
+}
+
+.tech-button:active {
+  transform: scale(0.98);
+}
+
+.tech-button:hover::after {
+  opacity: 1;
+}
+ /* End section 7 */
+
+/* ====================================== */
+/* ==============================popup section============================= */
+/* ------------loading-bar------------------ */
+.loading-bar {
+  width: 100%;
+  height: 16px;
+  border-radius: 20px;
+  background: rgba(100, 0, 0, 0.5);
+  overflow: hidden;
+  margin-top: auto;
+  display: none;
+  border: 1px solid #ff0000;
+}
+
+.loading-inner {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #ff0000, #ff5f5f);
+  transition: width 1.2s ease;
+  box-shadow: 0 0 10px #ff0000;
+}
+/* -------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  z-index: 100;
+}
+
+.modal-window {
+  width: min(680px, 100%);
+  padding: 28px;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 0, 0, 0.22);
+  background: rgba(8, 0, 0, 0.96);
+  box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
+  position: relative;
+  animation: popIn 0.32s ease;
+}
+
+.close-btn {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  border: none;
+  background: transparent;
+  color: #f1f1f1;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.modal-image {
+  width: 100%;
+  height: 340px;
+  border-radius: 20px;
+  margin: 18px 0;
+  background: radial-gradient(circle at 30% 25%, #ff4d4d, transparent 25%),
+    linear-gradient(135deg, rgba(255, 0, 0, 0.22), transparent 60%),
+    /* target image */
+    url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"%3E%3Crect width="640" height="360" fill="%23000000"/%3E%3Cpath d="M72 72h496v216H72z" fill="none" stroke="%23ff0000" stroke-width="6" stroke-dasharray="18 14"/%3E%3Ccircle cx="320" cy="180" r="72" fill="none" stroke="%23ff0000" stroke-width="9"/%3E%3Cpath d="M320 108v-44M320 252v44M388 180h44M252 180h-44" fill="none" stroke="%23ff0000" stroke-width="7"/%3E%3C/svg%3E');
+  background-size: cover;
+  box-shadow: inset 0 0 40px rgba(255, 0, 0, 0.18);
+}
+
+.hidden {
+  display: none;
+}
 
 
 /* ====================================== */
@@ -211,3 +539,68 @@ width: 80%;
     width: 6em;
     height: 8em;
 }
+
+
+/* ================================================== */
+/* Animation */
+
+@keyframes pulse {
+    to {
+      transform: scale(1.15);
+      box-shadow: 0 0 24px  #ff0000b3;
+    }
+  }
+  
+  @keyframes cardPulse {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+  }
+  
+  @keyframes reticleSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.7; }
+  }
+  
+  @keyframes scanMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 48px; }
+  }
+  
+  @keyframes popIn {
+    from { opacity: 0; transform: translateY(18px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  
+  @media (max-width: 960px) {
+    .target-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    #targetPhoto,
+    #fingerprintPanel,
+    #crimesPanel,
+    #assassinPanel,
+    #bodyViewPanel,
+    #infoPanel {
+      grid-column: span 6;
+    }
+  }
+  
+  @media (max-width: 620px) {
+    .app-container {
+      padding: 16px;
+    }
+    .agent-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .action-panel {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+  
