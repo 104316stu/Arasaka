@@ -298,6 +298,8 @@ width: 80%;
   border-radius: 20px;
   background: radial-gradient(circle at center, #ff000024, transparent 48%);
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .body-silhouette {
@@ -307,6 +309,20 @@ width: 80%;
   border-radius: 18px;
   box-shadow: inset 0 0 30px #ff00002e;
   display: flex;
+  justify-content: center;
+}
+.bg-effect{
+  overflow: hidden;
+  height: 48em;
+  display: flex;
+  width: 89%;
+  padding: 2em;
+  justify-content: center;
+}
+
+.bg-img{
+  width: 114%;
+  height: 108%;
 }
 
 .scan-lines::after {
