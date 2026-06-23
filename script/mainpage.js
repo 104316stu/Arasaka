@@ -443,14 +443,14 @@ function enforcePromptBoundary() {
     }
 }
 
-const song = new Audio('../sounds/house.mp3')
+const song = new Audio('./sounds/house.mp3')
 function trauma() {
     
     song.currentTime = 20
     song.play()
 
     const img = document.createElement('img')
-    img.src = '../imgs/house.jpeg'
+    img.src = './imgs/house.jpeg'
     img.classList.add("house")
 
     document.body.appendChild(img)
@@ -547,9 +547,9 @@ terminalInit()
 
 
 const trashFileData = [
-    { name: "adam_smasher_image", ext: ".jpg", date: "2077.01.31", type: "IMAGE", size: "18 KB", img: "../imgs/trash/adam.webp" },
+    { name: "adam_smasher_image", ext: ".jpg", date: "2077.01.31", type: "IMAGE", size: "18 KB", img: "./imgs/trash/adam.webp" },
 
-    { name: "soulkiller_demo", ext: ".vid", date: "2077.02.14", type: "VIDEO", size: "2.1 GB", video: "../imgs/trash/Johhny.mp4" },
+    { name: "soulkiller_demo", ext: ".vid", date: "2077.02.14", type: "VIDEO", size: "2.1 GB", video: "./imgs/trash/Johhny.mp4" },
 
 ]
 
@@ -575,7 +575,7 @@ function initTrash() {
                 wrapper.className = "trash-preview"
 
                 const closeButton = document.createElement("img")
-                closeButton.src = "../imgs/icons/Close.svg"
+                closeButton.src = "./imgs/icons/Close.svg"
                 closeButton.alt = "Close"
                 closeButton.className = "title-button static"
                 wrapper.appendChild(closeButton)
