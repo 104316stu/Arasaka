@@ -24,8 +24,8 @@
 
         <div class="program" draggable="true" id="terminal" style="display: none"> 
             <div class="title-bar-terminal">
-                <img src="../imgs/icons/Minimize.png" alt="Minimize" class="title-button static">
-                <img src="../imgs/icons/Close.svg" alt="Close" class="title-button static" id="close">
+                <img src="./imgs/icons/Minimize.png" alt="Minimize" class="title-button static">
+                <img src="./imgs/icons/Close.svg" alt="Close" class="title-button static" id="close">
             </div>
                  <div class="trash-toolbar">
                     <span class="trash-toolbar-path">ARASAKA-OS:///<span>TERMINAL</span></span>
@@ -37,8 +37,8 @@
 
         <div class="program" draggable="true" id="trash" style="display: none">
             <div class="title-bar-trash">
-                <img src="../imgs/icons/Minimize.png" alt="Minimize" class="title-button static">
-                <img src="../imgs/icons/Close.svg" alt="Close" class="title-button static">
+                <img src="./imgs/icons/Minimize.png" alt="Minimize" class="title-button static">
+                <img src="./imgs/icons/Close.svg" alt="Close" class="title-button static">
             </div>
             <div class="trash-body">
                 <div class="trash-toolbar">
